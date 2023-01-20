@@ -1,0 +1,16 @@
+{
+  "name": "shiyushi-api",
+  "version": "1.0.0",
+  "description": "shiyushi api",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wannadream",
+  "license": "MIT",
+  "dependencies": {
+    "bencode": "^3.0.0",
+    "formidable": "^2.1.1"
+  }
+}
