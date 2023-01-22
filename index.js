@@ -15,8 +15,7 @@ function processTorrentFile(req, res) {
     });
     part.on("end", function () {
       const torrent = bencode.decode(cacheBuffer);
-      console.log(torrent.announce.toString("utf8"));
-      res.write(JSON.stringify(torrent));
+      res.write(torrent.announce.toString("utf8"));
       res.end();
     });
     part.on("error", function (err) {
