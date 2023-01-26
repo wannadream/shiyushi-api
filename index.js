@@ -38,6 +38,10 @@ function writeUploadForm(req, res) {
 
 http
   .createServer(function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "OPTIONS, POST, GET");
+    res.setHeader("Access-Control-Max-Age", 86400);
+
     if (req.url === "/torrent") {
       processTorrentFile(req, res);
     } else {
