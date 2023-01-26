@@ -15,7 +15,15 @@ function processTorrentFile(req, res) {
     });
     part.on("end", function () {
       const torrent = bencode.decode(cacheBuffer);
-      res.write(torrent.announce.toString("utf8"));
+      const announceList = torrent["announce-list"];
+      res.write("[");
+      for (let i = 0; i < announceList.length; i++) {
+        res.write('"' + announceList[i].toString("utf-8") + '"');
+        if (i != announceList.length - 1) {
+          res.write(",");
+        }
+      }
+      res.write("]");
       res.end();
     });
     part.on("error", function (err) {
