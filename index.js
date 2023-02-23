@@ -16,7 +16,8 @@ function processTorrentFile(req, res) {
     part.on("end", function () {
       const torrent = bencode.decode(cacheBuffer);
       const announceList = torrent["announce-list"];
-      res.write("[");
+      res.write("{");
+      res.write('"announceList":[');
       for (let i = 0; i < announceList.length; i++) {
         res.write('"' + announceList[i].toString("utf-8") + '"');
         if (i != announceList.length - 1) {
@@ -24,6 +25,11 @@ function processTorrentFile(req, res) {
         }
       }
       res.write("]");
+      res.write(",");
+      res.write(`"pieces":"${torrent.info.pieces.toString("base64")}"`);
+      res.write(",");
+      res.write(`"piecesLength":${torrent.info["piece length"]}`);
+      res.write("}");
       res.end();
     });
     part.on("error", function (err) {
